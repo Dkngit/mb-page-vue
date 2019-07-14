@@ -19,7 +19,8 @@ module.exports = {
         'baseIndent': 1
       }
     ],
-    "space-before-function-paren": [1, "never"]
+    "space-before-function-paren": [1, "never"],
+    "object-curly-spacing": [2, "never"]
   },
   parserOptions: {
     parser: 'babel-eslint'
