@@ -8,7 +8,7 @@
               <el-input v-model="obj.username"></el-input>
             </el-form-item>
             <el-form-item label="密码">
-              <el-input v-model="obj.password" show-password></el-input>
+              <el-input v-model="obj.password" show-password=""></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit">登录</el-button>
@@ -22,44 +22,31 @@
 </template>
 
 <script>
-  import axios from 'axios'
+    import http from '@/axiosWrap'
 
-  let config = {
-    url: 'http://localhost:8080/user',
-    method: 'get',
-    withCredentials: true,
-    headers: {
-      // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      // 'X-Requested-With': 'XMLHttpRequest',
-      authorization: 'Basic ' + btoa('admin:admin')
+    export default {
+        name: 'login',
+        components: {},
+        data() {
+            return {
+                obj: {username: 'admin', password: 'admin'}
+            }
+        },
+        methods: {
+            onSubmit() {
+                http.get('/user', {
+                    auth: {username: this.obj.username, password: this.obj.password}
+                }).then(response => {
+                    console.log(response)
+                }).catch(error => console.log(error))
+            },
+            onTest() {
+                http.get('/resource').then(response => {
+                    console.log(response)
+                })
+            }
+        }
     }
-    // , auth: {username: 'admin', password: 'admin'}
-  };
-
-  // Alter defaults after instance has been created
-  // http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-  export default {
-    name: 'login',
-    components: {},
-    data() {
-      return {
-        obj: {username: 'admin', password: 'admin'}
-      }
-    },
-    methods: {
-      onSubmit() {
-        axios.request(config).then(response => {
-          console.log(response)
-        }).catch(error => console.log(error))
-      },
-      onTest() {
-        axios.get('http://localhost:8080/').then(response => {
-          console.log(response)
-        })
-      }
-    }
-  }
 </script>
 
 <style lang="stylus" scoped>
