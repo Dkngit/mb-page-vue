@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <el-container>
-      <el-main>
+  <div style="width: 100%">
         <div class="form">
           <el-form ref="form" :model="obj">
             <el-form-item label="用户名">
@@ -16,13 +14,12 @@
             </el-form-item>
           </el-form>
         </div>
-      </el-main>
-    </el-container>
   </div>
 </template>
 
 <script>
     import http from '@/axiosWrap'
+    import {mapMutations} from 'vuex'
 
     export default {
         name: 'login',
@@ -33,11 +30,13 @@
             }
         },
         methods: {
+            ...mapMutations(["setOwn"]),
             onSubmit() {
-                http.get('/user', {
+                http.get('api/user/own', {
                     auth: {username: this.obj.username, password: this.obj.password}
                 }).then(response => {
-                    console.log(response)
+                    console.log(response);
+                    this.setOwn(response.data);
                 }).catch(error => console.log(error))
             },
             onTest() {

@@ -1,15 +1,19 @@
 import Vue from 'vue'
+Vue.use(Router);
+
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import LoginIn from './views/LoginIn.vue'
+import Users from "@/user/Users";
+import UserEdit from "@/user/UserEdit";
 
-Vue.use(Router);
+
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -30,6 +34,16 @@ export default new Router({
       path: '/loginIn',
       name: 'loginIn',
       component: LoginIn
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users
+    },
+    {
+      path: '/userEdit',
+      name: 'userEdit',
+      component: UserEdit
     }
   ]
 })
