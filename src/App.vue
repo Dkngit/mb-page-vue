@@ -1,6 +1,14 @@
 <template>
     <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+            <div>Header</div>
+            <div v-if="loginInfo">
+                {{loginInfo.name}}
+            </div>
+            <div v-else>
+                <el-button type="primary" @click="to('login')">登录</el-button>
+            </div>
+        </el-header>
         <el-container>
             <el-aside width="200px">
                 <el-tree :data="trees" @node-click="onNodeClick"></el-tree>
@@ -19,7 +27,11 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+    import Base from "@/components/Base";
+
     export default {
+        mixins: [Base],
         name: 'app',
         data() {
             return {
@@ -30,13 +42,15 @@
                 ]
             }
         },
+        computed: {
+            ...mapState(["loginInfo"])
+        },
         methods: {
             onNodeClick(data) {
                 console.log(data);
                 this.$router.push({
                     name: data.link
                 })
-
             }
         },
         created() {

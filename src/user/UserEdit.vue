@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import http from '@/axiosWrap'
+    import http from '@/utils/http'
 
     export default {
         name: 'userEdit',

@@ -1,6 +1,4 @@
 import Vue from 'vue'
-Vue.use(Router);
-
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
@@ -8,6 +6,7 @@ import LoginIn from './views/LoginIn.vue'
 import Users from "@/user/Users";
 import UserEdit from "@/user/UserEdit";
 
+Vue.use(Router);
 
 
 export default new Router({

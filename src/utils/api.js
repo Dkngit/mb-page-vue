@@ -1,0 +1,1 @@
+export const apiUserOwn = "api/user/own";
