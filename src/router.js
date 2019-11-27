@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
-import LoginIn from './views/LoginIn.vue'
 import Users from "@/user/Users";
 import UserEdit from "@/user/UserEdit";
 
@@ -28,11 +27,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/loginIn',
-      name: 'loginIn',
-      component: LoginIn
     },
     {
       path: '/users',

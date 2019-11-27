@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import http from '@/utils/http'
+    import {get} from "@/utils/http";
     import {mapMutations} from 'vuex'
     import {apiUserOwn} from "@/utils/api";
 
@@ -34,7 +34,7 @@
         methods: {
             ...mapMutations(["setLoginInfo"]),
             onSubmit() {
-                http.get(apiUserOwn, {
+                get(apiUserOwn, {
                     auth: {username: this.obj.username, password: this.obj.password}
                 }).then(response => {
                     console.log(response);
@@ -42,12 +42,12 @@
                 }).catch(error => console.log(error))
             },
             onTest() {
-                http.get('/resource').then(response => {
+                get('/resource').then(response => {
                     console.log(response)
                 })
             },
             getUserInfo() {
-                http.get(apiUserOwn).then(response => {
+                get(apiUserOwn).then(response => {
                     console.log(response);
                     this.setLoginInfo(response.data);
                 }).catch(error => console.log(error))

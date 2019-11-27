@@ -1,38 +1,45 @@
 <template>
-    <el-container>
-        <el-header>
-            <div>Header</div>
-            <div v-if="loginInfo">
-                {{loginInfo.name}}
-            </div>
-            <div v-else>
-                <el-button type="primary" @click="to('login')">登录</el-button>
-            </div>
-        </el-header>
-        <el-container>
-            <el-aside width="200px">
-                <el-tree :data="trees" @node-click="onNodeClick"></el-tree>
-            </el-aside>
+    <div>
+        <el-container v-if="loginInfo">
+            <el-header class="app-header">
+                <div>Header</div>
+                <div class="app-header-info">
+                    {{loginInfo.name}}
+                </div>
+            </el-header>
             <el-container>
-                <el-main>
-                    <div v-if="isAtRoot">
-                        <router-link class="a-css" to="/login">Login</router-link>
-                    </div>
-                    <router-view/>
-                </el-main>
-                <!--        <el-footer>Footer</el-footer>-->
+                <el-aside width="200px">
+                    <el-tree :data="trees" @node-click="onNodeClick"></el-tree>
+                </el-aside>
+                <el-container>
+                    <el-main>
+                        <!--                        <div v-if="isAtRoot">-->
+                        <!--                            <router-link class="a-css" to="/login">Login</router-link>-->
+                        <!--                        </div>-->
+                        <router-view/>
+                    </el-main>
+                    <!--        <el-footer>Footer</el-footer>-->
+                </el-container>
             </el-container>
         </el-container>
-    </el-container>
+        <div v-else>
+            <Login></Login>
+        </div>
+    </div>
+
 </template>
 
 <script>
     import {mapState} from 'vuex'
     import Base from "@/components/Base";
+    import Login from "@/views/Login";
 
     export default {
         mixins: [Base],
         name: 'app',
+        components: {
+            Login
+        },
         data() {
             return {
                 isAtRoot: false,
@@ -72,4 +79,13 @@
     .a-css
         margin 5px
 
+    .app-header
+        display flex
+        justify-content: space-between
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+        margin-bottom 5px
+
+    .app-header-info
+        /*align-self right*/
 </style>

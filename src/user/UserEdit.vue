@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import http from '@/utils/http'
+    import {post} from "@/utils/http";
 
     export default {
         name: 'userEdit',
@@ -37,15 +37,14 @@
                 rules: {
                     username: [
                         {required: true, message: '请输入用户名', trigger: 'blur'},
-                        {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+                        {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'}
                     ],
                     email: [
-                        {required: true, message: '请输入邮箱', trigger: 'blur'},
-                        {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+                        {required: true, message: '请输入邮箱', trigger: 'blur'}
                     ],
                     password: [
                         {required: true, message: '请输入密码', trigger: 'blur'},
-                        {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+                        {min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur'}
                     ]
                 }
             }
@@ -55,6 +54,7 @@
                 this.$refs.form.validate((valid) => {
                     if (valid) {
                         alert('submit!');
+                        // post()
                     } else {
                         console.log('error submit!!');
                         return false;
