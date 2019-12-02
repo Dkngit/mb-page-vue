@@ -1,4 +1,4 @@
-import Router from 'vue-router';
+import router from '@/router'
 import {checkLogin} from "@/components/CheckLogin";
 
 export default {
@@ -8,7 +8,7 @@ export default {
             if (!checkLogin()) {
                 name = 'login'
             }
-            Router.push({
+            router.push({
                 name: name,
                 query: query
             });

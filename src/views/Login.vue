@@ -10,8 +10,8 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">登录</el-button>
-                    <el-button @click="onTest">忘记密码</el-button>
-                    <el-button @click="getUserInfo">getUserInfo</el-button>
+<!--                    <el-button @click="onTest">忘记密码</el-button>-->
+<!--                    <el-button @click="getUserInfo">getUserInfo</el-button>-->
                 </el-form-item>
             </el-form>
         </div>
@@ -32,26 +32,26 @@
             }
         },
         methods: {
-            ...mapMutations(["setLoginInfo"]),
+            ...mapMutations(["setUser"]),
             onSubmit() {
                 get(apiUserOwn, {
                     auth: {username: this.obj.username, password: this.obj.password}
                 }).then(response => {
                     console.log(response);
-                    this.setLoginInfo(response.data);
+                    this.setUser(response.data);
                 }).catch(error => console.log(error))
             },
-            onTest() {
-                get('/resource').then(response => {
-                    console.log(response)
-                })
-            },
-            getUserInfo() {
-                get(apiUserOwn).then(response => {
-                    console.log(response);
-                    this.setLoginInfo(response.data);
-                }).catch(error => console.log(error))
-            }
+            // onTest() {
+            //     get('/resource').then(response => {
+            //         console.log(response)
+            //     })
+            // },
+            // getUserInfo() {
+            //     get(apiUserOwn).then(response => {
+            //         console.log(response);
+            //         this.setLoginInfo(response.data);
+            //     }).catch(error => console.log(error))
+            // }
         }
     }
 </script>

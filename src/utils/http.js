@@ -10,14 +10,14 @@ const instance = axios.create({
     withCredentials: true
 });
 
-const get = (url) => {
+const get = (url,config) => {
     // if (checkLogin()) {
     //     return instance.get(url)
     // }
     // VueRouter.push({
     //     name: 'login'
     // })
-    return instance.get(url)
+    return instance.get(url,config)
 };
 const post = (url, data) => {
     // if (checkLogin()) {
@@ -28,4 +28,5 @@ const post = (url, data) => {
     // })
     return instance.post(url, data)
 };
+
 export {get, post}

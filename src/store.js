@@ -5,13 +5,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        loginInfo: null
+        user: null
     },
     mutations: {
-        setLoginInfo(state, data) {
+        setUser(state, data) {
             // 设置登录信息
-            console.log("setLoginInfo", data);
-            state.loginInfo = data;
+            console.log("setUser", data);
+            state.user = data;
         }
     },
     actions: {}

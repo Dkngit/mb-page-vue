@@ -1,5 +1,5 @@
 import store from "@/store";
 
 export function checkLogin() {
-  return !!store.state.loginInfo;
+  return !!store.state.user;
 }

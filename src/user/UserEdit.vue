@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="user-edit-root">
+{{user}}
         <el-form ref="form" :model="obj" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="obj.username"></el-input>
@@ -14,7 +15,7 @@
                 <el-input v-model="verifyPassword" show-password></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                <el-button type="primary" @click="onSubmit">提交</el-button>
                 <el-button>取消</el-button>
             </el-form-item>
         </el-form>
@@ -23,9 +24,13 @@
 
 <script>
     import {post} from "@/utils/http";
+    import {mapState} from "vuex";
 
     export default {
         name: 'userEdit',
+        props: {
+            id: String
+        },
         data() {
             return {
                 obj: {
@@ -49,6 +54,9 @@
                 }
             }
         },
+        computed: {
+            ...mapState(["user"])
+        },
         methods: {
             onSubmit() {
                 this.$refs.form.validate((valid) => {
@@ -65,5 +73,9 @@
     }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
+    .user-edit-root {
+        width: 600px;
+        margin: auto;
+    }
 </style>

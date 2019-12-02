@@ -1,27 +1,25 @@
 <template>
     <div>
-        <el-container v-if="loginInfo">
-            <el-header class="app-header">
-                <div>Header</div>
+        <div v-if="user">
+            <div class="app-header">
+                <el-dropdown>
+                  <span class="el-dropdown-link">
+                    服务列表<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>黄金糕</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <!--                <div>Header</div>-->
                 <div class="app-header-info">
-                    {{loginInfo.name}}
+                    <div class="user-info" @click="to('userEdit')">{{user.name}}</div>
+                    <el-button type="danger" round plain size="small">退出</el-button>
                 </div>
-            </el-header>
-            <el-container>
-                <el-aside width="200px">
-                    <el-tree :data="trees" @node-click="onNodeClick"></el-tree>
-                </el-aside>
-                <el-container>
-                    <el-main>
-                        <!--                        <div v-if="isAtRoot">-->
-                        <!--                            <router-link class="a-css" to="/login">Login</router-link>-->
-                        <!--                        </div>-->
-                        <router-view/>
-                    </el-main>
-                    <!--        <el-footer>Footer</el-footer>-->
-                </el-container>
-            </el-container>
-        </el-container>
+            </div>
+            <div>
+                <router-view/>
+            </div>
+        </div>
         <div v-else>
             <Login></Login>
         </div>
@@ -50,7 +48,7 @@
             }
         },
         computed: {
-            ...mapState(["loginInfo"])
+            ...mapState(["user"])
         },
         methods: {
             onNodeClick(data) {
@@ -75,17 +73,34 @@
     }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
     .a-css
         margin 5px
 
     .app-header
+        box-sizing border-box
+        width 100%
         display flex
         justify-content: space-between
-        background-color: rgba(255, 255, 255, 0.4);
-        box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+        align-items: center
+        background-color: #6e9eff;
+        color white
+        padding 0 20px
+        /*box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;*/
         margin-bottom 5px
 
     .app-header-info
-        /*align-self right*/
+        align-self right
+
+    .el-dropdown-link {
+        cursor: pointer;
+        /*color: #409EFF;*/
+        color white
+    }
+
+    .user-info {
+        cursor: pointer;
+        display inline-block
+        margin-right 10px
+    }
 </style>
