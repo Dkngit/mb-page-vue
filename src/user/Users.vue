@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import http from '@/utils/http'
+    import {post} from '@/utils/http'
 
     export default {
         name: 'Users',
@@ -45,10 +45,8 @@
 
             },
             fetchList() {
-                http.get('api/user/list', {
-                    params: {
-                        pageIndex: this.pageIndex, pageSize: this.pageSize
-                    }
+                post('api/user/list', {
+                    pageIndex: this.pageIndex, pageSize: this.pageSize
                 }).then(response => {
                     let resData = response.data;
                     console.log(resData);

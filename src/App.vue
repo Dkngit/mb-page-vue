@@ -12,7 +12,7 @@
                 </el-dropdown>
                 <!--                <div>Header</div>-->
                 <div class="app-header-info">
-                    <div class="user-info" @click="to('userEdit')">{{user.name}}</div>
+                    <div class="user-info" @click="to('userEdit')">{{user.username}}</div>
                     <el-button type="danger" round plain size="small">退出</el-button>
                 </div>
             </div>

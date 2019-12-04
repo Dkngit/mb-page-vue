@@ -1,1 +1,1 @@
-export const apiUserOwn = "api/user/own";
+export const apiUserLogin = "api/user/login";
