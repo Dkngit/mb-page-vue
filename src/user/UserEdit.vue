@@ -1,18 +1,18 @@
 <template>
-    <div class="user-edit-root">
-{{user}}
+    <div class="div-root">
+        {{user}}
         <el-form ref="form" :model="obj" :rules="rules">
             <el-form-item label="用户名" prop="username">
-                <el-input v-model="obj.username"></el-input>
+                <el-input v-model="obj.username"/>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="obj.email"></el-input>
+                <el-input v-model="obj.email"/>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-                <el-input v-model="obj.password" show-password></el-input>
+                <el-input v-model="obj.password" show-password/>
             </el-form-item>
             <el-form-item label="确认密码" prop="password">
-                <el-input v-model="verifyPassword" show-password></el-input>
+                <el-input v-model="verifyPassword" show-password/>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import {post} from "@/utils/http";
     import {mapState} from "vuex";
 
     export default {
@@ -74,7 +73,7 @@
 </script>
 
 <style lang="stylus" scoped>
-    .user-edit-root {
+    .div-root {
         width: 600px;
         margin: auto;
     }

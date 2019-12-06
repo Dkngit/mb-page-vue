@@ -4,7 +4,7 @@
             <div class="app-header">
                 <el-dropdown>
                   <span class="el-dropdown-link">
-                    服务列表<i class="el-icon-arrow-down el-icon--right"></i>
+                    服务列表<i class="el-icon-arrow-down el-icon--right"/>
                   </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -12,8 +12,8 @@
                 </el-dropdown>
                 <!--                <div>Header</div>-->
                 <div class="app-header-info">
-                    <div class="user-info" @click="to('userEdit')">{{user.username}}</div>
-                    <el-button type="danger" round plain size="small">退出</el-button>
+                    <div class="user-info" @click="to('passwordEdit')">{{user.username}}</div>
+                    <el-button type="danger" round plain size="small" @click="onLogout()">退出</el-button>
                 </div>
             </div>
             <div>
@@ -21,16 +21,17 @@
             </div>
         </div>
         <div v-else>
-            <Login></Login>
+            <Login/>
         </div>
     </div>
 
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapMutations, mapState} from 'vuex'
     import Base from "@/components/Base";
     import Login from "@/views/Login";
+    import {post} from "@/utils/http";
 
     export default {
         mixins: [Base],
@@ -51,11 +52,15 @@
             ...mapState(["user"])
         },
         methods: {
-            onNodeClick(data) {
-                console.log(data);
-                this.$router.push({
-                    name: data.link
-                })
+            ...mapMutations(["setUser"]),
+            onLogout() {
+                const loading = this.$loading({
+                    lock: true
+                });
+                post("/logout").then(res => {
+                    console.log(res);
+                    this.setUser(null);
+                }).finally(() => loading.close())
             }
         },
         created() {

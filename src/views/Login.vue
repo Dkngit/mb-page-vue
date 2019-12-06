@@ -3,15 +3,15 @@
         <div class="form">
             <el-form ref="form" :model="obj">
                 <el-form-item label="用户名">
-                    <el-input v-model="obj.username"></el-input>
+                    <el-input v-model="obj.username"/>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input v-model="obj.password" show-password=""></el-input>
+                    <el-input v-model="obj.password" show-password=""/>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">登录</el-button>
-<!--                    <el-button @click="onTest">忘记密码</el-button>-->
-<!--                    <el-button @click="getUserInfo">getUserInfo</el-button>-->
+                    <!--                    <el-button @click="onTest">忘记密码</el-button>-->
+                    <!--                    <el-button @click="getUserInfo">getUserInfo</el-button>-->
                 </el-form-item>
             </el-form>
         </div>
@@ -39,7 +39,18 @@
                 }).then(response => {
                     console.log(response);
                     this.setUser(response.data);
-                }).catch(error => console.log(error))
+                }).catch(error => {
+                    console.log(error);
+                    if (error.response) {
+                        let httpStatus = error.response.status;
+                        console.log(httpStatus);
+                        switch (httpStatus) {
+                            case 401:
+                                this.$message.error("用户名或密码错误");
+                                break;
+                        }
+                    }
+                })
             },
             // onTest() {
             //     get('/resource').then(response => {
