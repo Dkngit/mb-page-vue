@@ -21,20 +21,20 @@
 <script>
     import {get} from "@/utils/http";
     import {mapMutations} from 'vuex'
-    import {apiUserLogin} from "@/utils/api";
+    import {userLogin} from "@/utils/api";
 
     export default {
         name: 'login',
         components: {},
         data() {
             return {
-                obj: {username: 'admin', password: 'admin'}
+                obj: {username: 'admin', password: '123456'}
             }
         },
         methods: {
             ...mapMutations(["setUser"]),
             onSubmit() {
-                get(apiUserLogin, {
+                get(userLogin, {
                     auth: {username: this.obj.username, password: this.obj.password}
                 }).then(response => {
                     console.log(response);

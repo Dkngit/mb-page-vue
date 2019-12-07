@@ -1,3 +1,3 @@
-export const apiUserLogin = "api/user/login";
+export const userLogin = "api/user/login";
 
-export const apiUserPasswordEdit = "api/user/passwordEdit";
+export const userPasswordEdit = "api/user/passwordEdit";

@@ -19,7 +19,7 @@
 <script>
     import {post} from "@/utils/http";
     import {mapState} from "vuex";
-    import {apiUserPasswordEdit as aupeAPI} from "@/utils/api";
+    import {userPasswordEdit} from "@/utils/api";
 
     export default {
         name: 'PasswordEdit',
@@ -63,7 +63,7 @@
                         const loading = this.$loading({
                             lock: true
                         });
-                        post(aupeAPI, {password: this.obj.password}).then(() => {
+                        post(userPasswordEdit, {password: this.obj.password}).then(() => {
                             loading.close();
                             this.$message.success('修改成功');
                         }).catch(() => {
