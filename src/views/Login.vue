@@ -28,7 +28,7 @@
         components: {},
         data() {
             return {
-                obj: {username: 'admin', password: '123456'}
+                obj: {username: 'admin', password: 'admin'}
             }
         },
         methods: {
@@ -44,11 +44,16 @@
                     if (error.response) {
                         let httpStatus = error.response.status;
                         console.log(httpStatus);
+                        let text = '未知错误';
                         switch (httpStatus) {
                             case 401:
-                                this.$message.error("用户名或密码错误");
+                                text = '用户名或密码错误';
+                                break;
+                            case 500:
+                                text = '服务器异常';
                                 break;
                         }
+                        this.$message.error(text);
                     }
                 })
             },
