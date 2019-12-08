@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
-import Users from "@/user/Users";
-import UserEdit from "@/user/UserEdit";
-import PasswordEdit from "@/user/PasswordEdit";
+import Users from "@/views/Users";
+import UserEdit from "@/views/UserEdit";
+import PasswordEdit from "@/views/PasswordEdit";
 
 Vue.use(Router);
 
