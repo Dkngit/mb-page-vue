@@ -10,6 +10,7 @@
                         <el-dropdown-item>黄金糕</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
+                <div class="app-header-item">队伍管理</div>
                 <!--                <div>Header</div>-->
                 <div class="app-header-info">
                     <div class="user-info" @click="to('passwordEdit')">{{user.username}}</div>
@@ -79,23 +80,26 @@
 </script>
 
 <style lang="stylus" scoped>
-    .a-css
-        margin 5px
-
-    .app-header
+    .app-header {
         box-sizing border-box
         width 100%
         display flex
-        justify-content: space-between
+        /*justify-content: space-between*/
         align-items: center
         background-color: #6e9eff;
         color white
         padding 0 20px
         /*box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;*/
         margin-bottom 5px
+    }
+
+    .app-header-item {
+        margin 0 8px
+        font-size 14px
+    }
 
     .app-header-info
-        align-self right
+        margin-left auto
 
     .el-dropdown-link {
         cursor: pointer;
