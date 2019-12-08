@@ -2,20 +2,33 @@
     <div>
         <div v-if="user">
             <div class="app-header">
-                <el-dropdown>
-                  <span class="el-dropdown-link">
-                    服务列表<i class="el-icon-arrow-down el-icon--right"/>
-                  </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>黄金糕</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-                <div class="app-header-item">队伍管理</div>
-                <!--                <div>Header</div>-->
-                <div class="app-header-info">
-                    <div class="user-info" @click="to('passwordEdit')">{{user.username}}</div>
-                    <el-button type="danger" round plain size="small" @click="onLogout()">退出</el-button>
-                </div>
+                <el-menu
+                        :default-active="activeIndex"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1">处理中心</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">我的工作台</template>
+                        <el-menu-item index="2-1">选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+                        <el-submenu index="2-4">
+                            <template slot="title">选项4</template>
+                            <el-menu-item index="2-4-1">选项1</el-menu-item>
+                            <el-menu-item index="2-4-2">选项2</el-menu-item>
+                            <el-menu-item index="2-4-3">选项3</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                    <el-menu-item index="11" @click="to('teams')">队伍们</el-menu-item>
+                    <el-submenu index="99" style="float: right">
+                        <template slot="title">{{user.username}}</template>
+                        <el-menu-item index="99-1" @click="to('passwordEdit')">修改密码</el-menu-item>
+                        <el-menu-item index="99-99" @click="onLogout()">退出</el-menu-item>
+                    </el-submenu>
+                </el-menu>
             </div>
             <div>
                 <router-view/>
@@ -43,10 +56,7 @@
         data() {
             return {
                 isAtRoot: false,
-                trees: [
-                    {label: '用户', link: 'users'},
-                    {label: '一级 1'}
-                ]
+                activeIndex: '1',
             }
         },
         computed: {
@@ -62,6 +72,9 @@
                     console.log(res);
                     this.setUser(null);
                 }).finally(() => loading.close())
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
             }
         },
         created() {
@@ -81,35 +94,11 @@
 
 <style lang="stylus" scoped>
     .app-header {
-        box-sizing border-box
-        width 100%
-        display flex
-        /*justify-content: space-between*/
-        align-items: center
-        background-color: #6e9eff;
-        color white
-        padding 0 20px
-        /*box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;*/
         margin-bottom 5px
     }
 
-    .app-header-item {
-        margin 0 8px
-        font-size 14px
+    .el-menu-user {
+        float right
     }
 
-    .app-header-info
-        margin-left auto
-
-    .el-dropdown-link {
-        cursor: pointer;
-        /*color: #409EFF;*/
-        color white
-    }
-
-    .user-info {
-        cursor: pointer;
-        display inline-block
-        margin-right 10px
-    }
 </style>
