@@ -4,7 +4,7 @@ import Login from './views/Login.vue'
 import Users from "@/views/Users";
 import UserEdit from "@/views/UserEdit";
 import PasswordEdit from "@/views/PasswordEdit";
-import Teams from "@/views/Teams";
+import Teams from "@/team/Teams";
 
 Vue.use(Router);
 
