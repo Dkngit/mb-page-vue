@@ -80,10 +80,26 @@
             },
             handleDelete(index, row) {
                 console.log(index, row);
-                post(teamDelete, {id: row.id}).then(res => {
-                    console.log(res);
-                    this.list.splice(index, 1);
-                })
+                this.$confirm('确认删除该队伍？', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    post(teamDelete, {id: row.id}).then(res => {
+                        console.log(res);
+                        this.list.splice(index, 1);
+                        this.$message.success('删除成功');
+                    }).catch(() => {
+                        this.$message.error('删除失败');
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
+
             },
             onLoad() {
                 if (!this.loading) {
@@ -106,16 +122,11 @@
                     inputValidator: (e) => {
                         return !!e;
                     }
-                    // inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-                    // inputErrorMessage: '邮箱格式不正确'
                 }).then(({value}) => {
-                    // this.$message({
-                    //     type: 'success',
-                    //     message: '你的邮箱是: ' + value
-                    // });
                     post(teamSave, {name: value}).then(res => {
                         console.log(res);
-                    })
+                        this.$message.success('添加成功');
+                    }).catch(() => this.$message.error('添加失败')).finally(() => this.onLoad())
                 })
             }
         },
