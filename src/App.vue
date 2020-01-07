@@ -60,6 +60,7 @@
                 activeIndex: '1',
                 menus: [
                     {index: '11', route: 'teams'},
+                    {index: '21', route: 'users'},
                     {index: '99-1', route: 'passwordEdit'}
                 ]
             }
@@ -80,22 +81,20 @@
             },
             handleSelect(index, indexPath) {
                 console.log(index, indexPath);
-                // switch (index) {
-                //     case '11':
-                //         this.to('teams');
-                //         break;
-                //     case '99-1':
-                //         this.to('passwordEdit');
-                //         break;
-                //
+                // if (index !== this.activeIndex) {
+                //     const menu = this.menus.find(item => {
+                //         return item.index === index;
+                //     });
+                //     if (menu) {
+                //         this.to(menu.route);
+                //     }
                 // }
-                if (index !== this.activeIndex) {
-                    const menu = this.menus.find(item => {
-                        return item.index === index;
-                    });
-                    if (menu) {
-                        this.to(menu.route);
-                    }
+
+                const menu = this.menus.find(item => {
+                    return item.index === index;
+                });
+                if (menu) {
+                    this.to(menu.route);
                 }
             }
         },
