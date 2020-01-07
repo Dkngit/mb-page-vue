@@ -22,7 +22,8 @@
                             <el-menu-item index="2-4-3">选项3</el-menu-item>
                         </el-submenu>
                     </el-submenu>
-                    <el-menu-item index="11">队伍们</el-menu-item>
+                    <el-menu-item index="11">队伍</el-menu-item>
+                    <el-menu-item index="21">用户</el-menu-item>
                     <el-submenu index="99" style="float: right">
                         <template slot="title">{{user.username}}</template>
                         <el-menu-item index="99-1">修改密码</el-menu-item>
@@ -57,6 +58,10 @@
             return {
                 isAtRoot: false,
                 activeIndex: '1',
+                menus: [
+                    {index: '11', route: 'teams'},
+                    {index: '99-1', route: 'passwordEdit'}
+                ]
             }
         },
         computed: {
@@ -75,14 +80,22 @@
             },
             handleSelect(index, indexPath) {
                 console.log(index, indexPath);
-                switch (index) {
-                    case '11':
-                        this.to('teams');
-                        break;
-                    case '99-1':
-                        this.to('passwordEdit');
-                        break;
-
+                // switch (index) {
+                //     case '11':
+                //         this.to('teams');
+                //         break;
+                //     case '99-1':
+                //         this.to('passwordEdit');
+                //         break;
+                //
+                // }
+                if (index !== this.activeIndex) {
+                    const menu = this.menus.find(item => {
+                        return item.index === index;
+                    });
+                    if (menu) {
+                        this.to(menu.route);
+                    }
                 }
             }
         },
@@ -97,6 +110,16 @@
                 }
                 next();
             });
+
+            const routeName = this.$router.currentRoute.name;
+            if (routeName) {
+                const menu = this.menus.find(item => {
+                    return item.route === routeName;
+                });
+                if (menu) {
+                    this.activeIndex = menu.index;
+                }
+            }
         }
     }
 </script>
