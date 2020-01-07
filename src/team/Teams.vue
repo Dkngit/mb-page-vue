@@ -17,13 +17,17 @@
             </el-table-column>
             <el-table-column
                     prop="createOn"
-                    label="修改日期"
-                    width="180">
+                    label="创建日期"
+                    width="180"
+                    :formatter="dateFormat"
+            >
             </el-table-column>
             <el-table-column
                     prop="modifyOn"
-                    label="创建日期"
-                    width="180">
+                    label="修改日期"
+                    width="180"
+                    :formatter="dateFormat"
+            >
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -51,10 +55,9 @@
 </template>
 
 <script>
-
-
     import {post} from "@/utils/http";
     import {teamDelete, teamList, teamSave} from "@/team/team_api";
+    import {dateFormat_lll} from "@/utils/moment";
 
     export default {
         name: "Teams",
@@ -68,6 +71,10 @@
             }
         },
         methods: {
+            dateFormat(row, column, cellValue) {
+                // console.log('dateFormat',row,column,cellValue,index);
+                return dateFormat_lll(cellValue)
+            },
             handleEdit(index, row) {
                 console.log(index, row);
             },

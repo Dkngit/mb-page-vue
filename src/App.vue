@@ -22,10 +22,10 @@
                             <el-menu-item index="2-4-3">选项3</el-menu-item>
                         </el-submenu>
                     </el-submenu>
-                    <el-menu-item index="11" @click="to('teams')">队伍们</el-menu-item>
+                    <el-menu-item index="11">队伍们</el-menu-item>
                     <el-submenu index="99" style="float: right">
                         <template slot="title">{{user.username}}</template>
-                        <el-menu-item index="99-1" @click="to('passwordEdit')">修改密码</el-menu-item>
+                        <el-menu-item index="99-1">修改密码</el-menu-item>
                         <el-menu-item index="99-99" @click="onLogout()">退出</el-menu-item>
                     </el-submenu>
                 </el-menu>
@@ -73,8 +73,17 @@
                     this.setUser(null);
                 }).finally(() => loading.close())
             },
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+            handleSelect(index, indexPath) {
+                console.log(index, indexPath);
+                switch (index) {
+                    case '11':
+                        this.to('teams');
+                        break;
+                    case '99-1':
+                        this.to('passwordEdit');
+                        break;
+
+                }
             }
         },
         created() {

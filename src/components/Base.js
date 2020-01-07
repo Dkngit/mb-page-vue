@@ -5,13 +5,17 @@ export default {
     name: "Base",
     methods: {
         to(name, query) {
-            if (!checkLogin()) {
-                name = 'login'
+            console.log("router", router.currentRoute);
+            if (router.currentRoute.name !== name) {
+                if (!checkLogin()) {
+                    name = 'login'
+                }
+                router.push({
+                    name: name,
+                    query: query
+                });
             }
-            router.push({
-                name: name,
-                query: query
-            });
+
         }
     }
 }
