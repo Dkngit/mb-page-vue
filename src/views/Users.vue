@@ -60,8 +60,7 @@
 <script>
     import {post} from '@/utils/http'
     import {dateFormat_lll} from "@/utils/moment";
-    import {teamDelete, teamSave} from "@/team/team_api";
-    import {userList} from "@/utils/api";
+    import {userDelete, userList} from "@/utils/api";
 
     export default {
         name: 'Users',
@@ -81,15 +80,19 @@
             },
             handleEdit(index, row) {
                 console.log(index, row);
+                this.$router.push({
+                    name: 'userEdit',
+                    query: {id: row.id}
+                })
             },
             handleDelete(index, row) {
                 console.log(index, row);
-                this.$confirm('确认删除该队伍？', {
+                this.$confirm('确认删除？', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    post(teamDelete, {id: row.id}).then(res => {
+                    post(userDelete, {id: row.id}).then(res => {
                         console.log(res);
                         this.list.splice(index, 1);
                         this.$message.success('删除成功');
@@ -118,18 +121,19 @@
                 }
             },
             openAdd() {
-                this.$prompt('请输入队伍名', '创建队伍', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    inputValidator: (e) => {
-                        return !!e;
-                    }
-                }).then(({value}) => {
-                    post(teamSave, {name: value}).then(res => {
-                        console.log(res);
-                        this.$message.success('添加成功');
-                    }).catch(() => this.$message.error('添加失败')).finally(() => this.onLoad())
-                })
+                // this.$prompt('请输入队伍名', '创建队伍', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     inputValidator: (e) => {
+                //         return !!e;
+                //     }
+                // }).then(({value}) => {
+                //     post(teamSave, {name: value}).then(res => {
+                //         console.log(res);
+                //         this.$message.success('添加成功');
+                //     }).catch(() => this.$message.error('添加失败')).finally(() => this.onLoad())
+                // })
+                this.$router.push('userEdit');
             }
         },
         created() {

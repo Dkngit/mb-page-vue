@@ -16,7 +16,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
-                <el-button>取消</el-button>
+                <el-button @click="$router.back()">取消</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -24,11 +24,13 @@
 
 <script>
     import {mapState} from "vuex";
+    import {post} from "@/utils/http";
+    import {userSave} from "@/utils/api";
 
     export default {
         name: 'userEdit',
         props: {
-            id: String
+            id: Number
         },
         data() {
             return {
@@ -60,8 +62,14 @@
             onSubmit() {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        // alert('submit!');
                         // post()
+                        post(userSave, this.obj).then(() => {
+                            this.$message.success('提交成功');
+                            this.$router.back();
+                        }).catch(() => {
+                            this.$message.fail('提交失败');
+                        })
                     } else {
                         console.log('error submit!!');
                         return false;

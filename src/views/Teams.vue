@@ -56,7 +56,7 @@
 
 <script>
     import {post} from "@/utils/http";
-    import {teamDelete, teamList, teamSave} from "@/team/team_api";
+    import {teamDelete, teamList, teamSave} from "@/utils/api";
     import {dateFormat_lll} from "@/utils/moment";
 
     export default {
