@@ -31,7 +31,7 @@
                     </el-submenu>
                 </el-menu>
             </div>
-            <div>
+            <div style="display: flex;justify-content: center">
                 <router-view/>
             </div>
         </div>

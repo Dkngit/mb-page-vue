@@ -1,18 +1,23 @@
 <template>
-    <div class="div-root">
+    <div>
+        <TeamEdit :show.sync="teamEditShow" :model="teamEditModel" v-on:newModel="onNewModel"></TeamEdit>
         <el-button @click="onLoad()">刷新</el-button>
-        <el-button @click="openAdd()">添加</el-button>
+        <el-button @click="handleEdit()">添加</el-button>
         <el-table v-loading="loading"
                   :data="list"
                   style="width: 100%">
             <el-table-column
                     prop="id"
-                    label="ID"
-                    width="180">
+                    label="ID">
             </el-table-column>
             <el-table-column
                     prop="name"
                     label="名称"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="description"
+                    label="说明"
                     width="180">
             </el-table-column>
             <el-table-column
@@ -29,7 +34,7 @@
                     :formatter="dateFormat"
             >
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="180">
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -58,16 +63,20 @@
     import {post} from "@/utils/http";
     import {teamDelete, teamList, teamSave} from "@/utils/api";
     import {dateFormat_lll} from "@/utils/moment";
+    import TeamEdit from "./TeamEdit";
 
     export default {
         name: "Teams",
+        components: {TeamEdit},
         data() {
             return {
                 list: null,
                 loading: false,
                 pageIndex: 0,
                 pageSize: 10,
-                totalPages: 1
+                totalPages: 1,
+                teamEditShow: false,
+                teamEditModel: null
             }
         },
         methods: {
@@ -75,8 +84,18 @@
                 // console.log('dateFormat',row,column,cellValue,index);
                 return dateFormat_lll(cellValue)
             },
+            onNewModel(e) {
+                for (let element of this.list) {
+                    if (element.id === e.id) {
+                        Object.assign(element, e);
+                        break;
+                    }
+                }
+            },
             handleEdit(index, row) {
                 console.log(index, row);
+                this.teamEditModel = row;
+                this.teamEditShow = true;
             },
             handleDelete(index, row) {
                 console.log(index, row);
@@ -139,8 +158,4 @@
 
 <style lang="stylus" scoped>
 
-    .div-root {
-        width: 80%;
-        margin: auto;
-    }
 </style>

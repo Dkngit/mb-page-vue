@@ -1,5 +1,5 @@
 <template>
-    <div class="div-root">
+    <div>
         <el-button @click="onLoad()">刷新</el-button>
         <el-button @click="openAdd()">添加</el-button>
         <el-table v-loading="loading"
@@ -7,8 +7,7 @@
                   style="width: 100%">
             <el-table-column
                     prop="id"
-                    label="ID"
-                    width="180">
+                    label="ID">
             </el-table-column>
             <el-table-column
                     prop="username"
@@ -144,8 +143,4 @@
 
 <style lang="stylus" scoped>
 
-    .div-root {
-        width: 80%;
-        margin: auto;
-    }
 </style>
