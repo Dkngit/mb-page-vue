@@ -4,34 +4,31 @@
         <el-button @click="onLoad()">刷新</el-button>
         <el-button @click="handleEdit()">添加</el-button>
         <el-table v-loading="loading"
-                  :data="list"
-                  style="width: 100%">
+                  :data="list">
             <el-table-column
                     prop="id"
                     label="ID">
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="名称"
-                    width="180">
+                    label="名称">
             </el-table-column>
             <el-table-column
                     prop="description"
-                    label="说明"
-                    width="180">
+                    label="说明">
             </el-table-column>
             <el-table-column
                     prop="createOn"
                     label="创建日期"
-                    width="180"
                     :formatter="dateFormat"
+                    width="160"
             >
             </el-table-column>
             <el-table-column
                     prop="modifyOn"
                     label="修改日期"
-                    width="180"
                     :formatter="dateFormat"
+                    width="160"
             >
             </el-table-column>
             <el-table-column label="操作" width="280">
@@ -89,11 +86,16 @@
                 return dateFormat_lll(cellValue)
             },
             onNewModel(e) {
+                let b = false;
                 for (let element of this.list) {
                     if (element.id === e.id) {
+                        b = true;
                         Object.assign(element, e);
                         break;
                     }
+                }
+                if (!b) {
+                    this.onLoad();
                 }
             },
             handleEdit(index, row) {

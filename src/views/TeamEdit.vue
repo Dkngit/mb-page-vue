@@ -7,10 +7,10 @@
             <el-form-item label="说明">
                 <el-input v-model="obj.description"/>
             </el-form-item>
-<!--            <el-form-item>-->
-<!--                <el-button type="primary" @click="onSubmit()">提交</el-button>-->
-<!--                <el-button>取消</el-button>-->
-<!--            </el-form-item>-->
+            <!--            <el-form-item>-->
+            <!--                <el-button type="primary" @click="onSubmit()">提交</el-button>-->
+            <!--                <el-button>取消</el-button>-->
+            <!--            </el-form-item>-->
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="onCancel">取 消</el-button>
@@ -34,11 +34,12 @@
             show(newV) {
                 if (newV === true) {
                     if (this.model) {
-                        this.obj = this.model;
-                    }else {
+                        this.obj = JSON.parse(JSON.stringify(this.model));
+                    } else {
                         this.obj = {}
                     }
-                    this.$refs.form.resetFields();
+                    if (this.$refs.form)
+                        this.$refs.form.resetFields();
                 }
             }
         },
