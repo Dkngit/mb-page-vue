@@ -34,7 +34,7 @@
                     :formatter="dateFormat"
             >
             </el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="280">
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -44,6 +44,10 @@
                             size="mini"
                             type="danger"
                             @click="handleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                    <el-button
+                            size="mini"
+                            @click="handleDelete(scope.$index, scope.row)">成员管理
                     </el-button>
                 </template>
             </el-table-column>
