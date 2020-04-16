@@ -31,7 +31,7 @@
     import {userSave} from "@/utils/api";
 
     export default {
-        name: 'userEdit',
+        name: 'TeamUserEdit',
         props: {
             id: Number
         },

@@ -5,6 +5,7 @@ import Users from "@/views/Users";
 import UserEdit from "@/views/UserEdit";
 import PasswordEdit from "@/views/PasswordEdit";
 import Teams from "@/views/Teams";
+import TeamUsers from "@/views/TeamUsers";
 
 Vue.use(Router);
 
@@ -45,6 +46,12 @@ export default new Router({
             path: '/teams',
             name: 'teams',
             component: Teams,
+            props: (route) => (route.query)
+        },
+        {
+            path: '/teamUsers',
+            name: 'teamUsers',
+            component: TeamUsers,
             props: (route) => (route.query)
         }
     ]

@@ -1,8 +1,10 @@
 <template>
     <div>
-        <UserEdit ref="userEdit" v-on:newModel="onNewModel"></UserEdit>
+        <TeamUserEdit ref="userEdit" v-on:newModel="onNewModel"></TeamUserEdit>
+        <el-page-header @back="$router.back()" content="成员管理">
+        </el-page-header>
         <el-button @click="onLoad()">刷新</el-button>
-        <el-button @click="handleEdit()">添加</el-button>
+        <el-button @click="openAdd()">添加</el-button>
         <el-table v-loading="loading"
                   :data="list"
                   style="width: 100%">
@@ -32,7 +34,7 @@
                     :formatter="dateFormat"
             >
             </el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -61,11 +63,11 @@
     import {post} from '@/utils/http'
     import {dateFormat_lll} from "@/utils/moment";
     import {userDelete, userList} from "@/utils/api";
-    import UserEdit from "@/views/UserEdit";
+    import TeamUserEdit from "@/views/TeamUserEdit";
 
     export default {
-        name: 'Users',
-        components: {UserEdit},
+        name: 'TeamUsers',
+        components: {TeamUserEdit},
         data() {
             return {
                 list: null,
@@ -95,7 +97,10 @@
             },
             handleEdit(index, row) {
                 console.log(index, row);
-                this.$refs.userEdit.openDialog(row);
+                this.$router.push({
+                    name: 'userEdit',
+                    query: {id: row.id}
+                })
             },
             handleDelete(index, row) {
                 console.log(index, row);
@@ -131,6 +136,21 @@
                         console.log(error);
                     }).finally(() => this.loading = false)
                 }
+            },
+            openAdd() {
+                // this.$prompt('请输入队伍名', '创建队伍', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     inputValidator: (e) => {
+                //         return !!e;
+                //     }
+                // }).then(({value}) => {
+                //     post(teamSave, {name: value}).then(res => {
+                //         console.log(res);
+                //         this.$message.success('添加成功');
+                //     }).catch(() => this.$message.error('添加失败')).finally(() => this.onLoad())
+                // })
+                this.$router.push('userEdit');
             }
         },
         created() {

@@ -31,8 +31,8 @@
                     </el-submenu>
                 </el-menu>
             </div>
-            <div style="display: flex;justify-content: center">
-                <router-view/>
+            <div style="display: flex;justify-content: center;box-sizing: content-box">
+                <router-view style="width: 90%;"/>
             </div>
         </div>
         <div v-else>

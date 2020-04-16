@@ -44,7 +44,7 @@
                     </el-button>
                     <el-button
                             size="mini"
-                            @click="handleDelete(scope.$index, scope.row)">成员管理
+                            @click="handleTeamUsers(scope.$index, scope.row)">成员管理
                     </el-button>
                 </template>
             </el-table-column>
@@ -81,6 +81,13 @@
             }
         },
         methods: {
+            handleTeamUsers(index, row) {
+                console.log(index, row);
+                this.$router.push({
+                    name: 'teamUsers',
+                    query: {teamId: row.id}
+                })
+            },
             dateFormat(row, column, cellValue) {
                 // console.log('dateFormat',row,column,cellValue,index);
                 return dateFormat_lll(cellValue)
