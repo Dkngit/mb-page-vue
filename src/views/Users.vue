@@ -76,18 +76,19 @@
             }
         },
         methods: {
-            onNewModel(e) {
-                let b = false;
-                for (let element of this.list) {
-                    if (element.id === e.id) {
-                        b = true;
-                        Object.assign(element, e);
-                        break;
-                    }
-                }
-                if (!b) {
-                    this.onLoad();
-                }
+            onNewModel() {
+                // let b = false;
+                // for (let element of this.list) {
+                //     if (element.id === e.id) {
+                //         b = true;
+                //         Object.assign(element, e);
+                //         break;
+                //     }
+                // }
+                // if (!b) {
+                //     this.onLoad();
+                // }
+                this.onLoad();
             },
             dateFormat(row, column, cellValue) {
                 // console.log('dateFormat',row,column,cellValue,index);

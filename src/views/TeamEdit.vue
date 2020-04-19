@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="收货地址" :visible="show" v-on:update:visible="onVisibleChange">
+    <el-dialog :visible="show" v-on:update:visible="onVisibleChange">
         <el-form ref="form" label-position="left" label-width="80px" :model="obj" :rules="rules">
             <el-form-item label="队伍名称" prop="name">
                 <el-input v-model="obj.name"/>
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-    import {post} from "../utils/http";
-    import {teamSave} from "../utils/api";
+    import {post} from "@/utils/http";
+    import {teamSave} from "@/utils/api";
 
     export default {
         name: "TeamEdit",

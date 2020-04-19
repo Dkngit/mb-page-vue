@@ -85,7 +85,7 @@
                 console.log(index, row);
                 this.$router.push({
                     name: 'teamUsers',
-                    query: {teamId: row.id}
+                    query: {teamId: row.id.toString()}
                 })
             },
             dateFormat(row, column, cellValue) {

@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="收货地址" :visible.sync="show">
+    <el-dialog title="用户编辑" :visible.sync="show">
         <el-form ref="form" :model="obj" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="obj.username"/>
@@ -7,10 +7,10 @@
             <el-form-item label="邮箱" prop="email">
                 <el-input v-model="obj.email"/>
             </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input v-model="obj.password" show-password/>
+            <el-form-item label="密码" prop="newPassword" v-if="!obj.id">
+                <el-input v-model="obj.newPassword" show-password/>
             </el-form-item>
-            <el-form-item label="确认密码" prop="password">
+            <el-form-item label="确认密码" prop="password" v-if="!obj.id">
                 <el-input v-model="verifyPassword" show-password/>
             </el-form-item>
             <!--            <el-form-item>-->
@@ -39,7 +39,7 @@
             return {
                 obj: {
                     username: null,
-                    password: null,
+                    newPassword: null,
                     email: null
                 },
                 verifyPassword: null,
@@ -51,7 +51,7 @@
                     email: [
                         {required: true, message: '请输入邮箱', trigger: 'blur'}
                     ],
-                    password: [
+                    newPassword: [
                         {required: true, message: '请输入密码', trigger: 'blur'},
                         {min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur'}
                     ]

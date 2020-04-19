@@ -1,10 +1,10 @@
 <template>
     <div>
-        <TeamUserEdit ref="userEdit" v-on:newModel="onNewModel"></TeamUserEdit>
+        <TeamUserEdit :team-id="Number(teamId)" ref="userEdit" v-on:newModel="onNewModel"></TeamUserEdit>
         <el-page-header @back="$router.back()" content="成员管理">
         </el-page-header>
         <el-button @click="onLoad()">刷新</el-button>
-        <el-button @click="openAdd()">添加</el-button>
+        <el-button @click="handleEdit()">添加</el-button>
         <el-table v-loading="loading"
                   :data="list"
                   style="width: 100%">
@@ -13,13 +13,13 @@
                     label="ID">
             </el-table-column>
             <el-table-column
-                    prop="username"
-                    label="用户名">
+                    prop="name"
+                    label="名称">
             </el-table-column>
-            <el-table-column
-                    prop="email"
-                    label="邮箱">
-            </el-table-column>
+            <!--            <el-table-column-->
+            <!--                    prop="user.email"-->
+            <!--                    label="邮箱">-->
+            <!--            </el-table-column>-->
             <el-table-column
                     prop="createOn"
                     label="创建日期"
@@ -62,12 +62,15 @@
 <script>
     import {post} from '@/utils/http'
     import {dateFormat_lll} from "@/utils/moment";
-    import {userDelete, userList} from "@/utils/api";
+    import {teamUserDelete, teamUserList} from "@/utils/api";
     import TeamUserEdit from "@/views/TeamUserEdit";
 
     export default {
         name: 'TeamUsers',
         components: {TeamUserEdit},
+        props: {
+            teamId: String
+        },
         data() {
             return {
                 list: null,
@@ -97,10 +100,11 @@
             },
             handleEdit(index, row) {
                 console.log(index, row);
-                this.$router.push({
-                    name: 'userEdit',
-                    query: {id: row.id}
-                })
+                // this.$router.push({
+                //     name: 'userEdit',
+                //     query: {id: row.id}
+                // })
+                this.$refs.userEdit.openDialog(row);
             },
             handleDelete(index, row) {
                 console.log(index, row);
@@ -109,8 +113,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    post(userDelete, {id: row.id}).then(res => {
-                        console.log(res);
+                    post(teamUserDelete, {id: row.id}).then(() => {
                         this.list.splice(index, 1);
                         this.$message.success('删除成功');
                     }).catch(() => {
@@ -126,7 +129,7 @@
             onLoad() {
                 if (!this.loading) {
                     this.loading = true;
-                    post(userList, {
+                    post(teamUserList, {
                         pageIndex: this.pageIndex, pageSize: this.pageSize
                     }).then(res => {
                         console.log(res);
@@ -136,21 +139,6 @@
                         console.log(error);
                     }).finally(() => this.loading = false)
                 }
-            },
-            openAdd() {
-                // this.$prompt('请输入队伍名', '创建队伍', {
-                //     confirmButtonText: '确定',
-                //     cancelButtonText: '取消',
-                //     inputValidator: (e) => {
-                //         return !!e;
-                //     }
-                // }).then(({value}) => {
-                //     post(teamSave, {name: value}).then(res => {
-                //         console.log(res);
-                //         this.$message.success('添加成功');
-                //     }).catch(() => this.$message.error('添加失败')).finally(() => this.onLoad())
-                // })
-                this.$router.push('userEdit');
             }
         },
         created() {
